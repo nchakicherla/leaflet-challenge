@@ -42,3 +42,25 @@ geoJsonLayer.addTo(map);
 
 // Automatically adjust map bounds to show all features
 map.fitBounds(geoJsonLayer.getBounds());
+
+const legend = L.control({position: 'bottomright'});
+
+legend.onAdd = function (map) {
+    const div = L.DomUtil.create('div', 'legend');
+    const grades = [0, 50, 100, 300, 500];  // Depth intervals
+    const colors = ['#00FF00', '#AAFF00', '#FFAA00', '#FF5500', '#FF0000'];  // Corresponding colors (green to red)
+
+    div.innerHTML = '<strong>Earthquake Depth (km)</strong><br>';
+
+    // Loop through depth intervals to generate a label with a colored square for each interval
+    for (let i = 0; i < grades.length; i++) {
+        div.innerHTML +=
+            '<i style="background:' + colors[i] + '"></i> ' +
+            grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + ' km<br>' : '+ km');
+    }
+
+    return div;
+};
+
+// Add the legend to the map
+legend.addTo(map);
