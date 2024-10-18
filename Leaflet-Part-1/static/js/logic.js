@@ -11,9 +11,11 @@ function getRadius(magnitude) {
 
 // Define a function to determine the circle color based on earthquake depth
 function getColor(depth) {
-    return depth > 300 ? '#bd0026' :  // Deep earthquakes - dark red
-           depth > 100 ? '#fecc5c' :  // Moderate depth - yellow-orange
-                         '#ffffb2';   // Shallow earthquakes - pale yellow
+        return depth > 500 ? '#FF0000' :  // Deepest - Red
+               depth > 300 ? '#FF5500' :  // High depth - Dark orange
+               depth > 100 ? '#FFAA00' :  // Medium depth - Yellow-orange
+               depth > 50  ? '#AAFF00' :  // Shallow - Yellow-green
+                             '#00FF00';   // Shallowest - Bright green
 }
 
 const geoJsonLayer = L.geoJSON(data, {
